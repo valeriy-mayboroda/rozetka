@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
     private WebDriver driver;
+
     private String url = "http://rozetka.com.ua";
 
     @FindBy(id = "3361")

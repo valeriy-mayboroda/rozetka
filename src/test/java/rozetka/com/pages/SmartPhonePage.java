@@ -1,10 +1,13 @@
 package rozetka.com.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,16 +18,7 @@ import java.util.List;
 
 public class SmartPhonePage {
     private WebDriver driver;
-
-    //@FindBy(xpath = "//*[@id=\"catalog_goods_block\"]/div/div/a")
-    @FindBy(className = "g-i-more-link-text")
-    private WebElement elsePage;
-
-    @FindBy(xpath = "//*[@id=\"page2\"]/a")
-    private WebElement secondPage;
-
-    @FindBy(id = "page3")
-    private WebElement thirdPage;
+    private WebDriverWait wait;
 
     @FindAll({@FindBy(xpath = "//*[@id=\"catalog_goods_block\"]/div/div/div/div/div/div/div/a")})
     private List<WebElement> elements;
@@ -32,13 +26,15 @@ public class SmartPhonePage {
     public SmartPhonePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
+        this.wait = new WebDriverWait(this.driver, 15, 1000);
     }
 
-    public void clickSecondPage() {secondPage.click();}
-    public void clickThirdPage() {thirdPage.click();}
-    //public void clickElsePage() {
-        //elsePage.click();
-    //}
+    public void clickNextPage(int pageNumber) {
+        By pageBy = By.id("page" + pageNumber);
+        driver.findElement(pageBy).click();
+        wait.until(ExpectedConditions.
+                visibilityOfElementLocated(By.cssSelector("#page" + pageNumber + ".active")));
+    }
 
     public List<String> getNames() {
         List<String> list = new ArrayList<>();

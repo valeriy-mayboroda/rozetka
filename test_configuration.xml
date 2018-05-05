@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Testing rozetka.com.ua" verbose="1">
-
+    
     <test name="Writing smartphones to file">
         <classes>
             <class name="rozetka.com.tests.TestSmartPhoneToFile"/>

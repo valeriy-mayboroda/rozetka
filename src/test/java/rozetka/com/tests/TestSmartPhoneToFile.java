@@ -6,7 +6,6 @@ import rozetka.com.pages.HomePage;
 import rozetka.com.pages.PhonePage;
 import rozetka.com.pages.PhoneTvElectonicPage;
 import rozetka.com.pages.SmartPhonePage;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,16 +29,19 @@ public class TestSmartPhoneToFile extends BasePageInstance {
 
     @Test
     public void startTest() {
+        int pageNumber = 3;
         homePage.openUrl();
         homePage.clickPhoneTvElectronics();
         phoneTvElectonicPage.clickPhones();
         phonePage.clickSmartPhones();
         List<String> list = new ArrayList<>();
         list.addAll(smartPhonePage.getNames());
-        smartPhonePage.clickSecondPage();
-        list.addAll(smartPhonePage.getNames());
-        smartPhonePage.clickThirdPage();
-        list.addAll(smartPhonePage.getNames());
+        if (pageNumber >= 2) {
+            for (int i = 2; i <= pageNumber; i++) {
+                smartPhonePage.clickNextPage(i);
+                list.addAll(smartPhonePage.getNames());
+            }
+        }
         smartPhonePage.save(list);
     }
 }
