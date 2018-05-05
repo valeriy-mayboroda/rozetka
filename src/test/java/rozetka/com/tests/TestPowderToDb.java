@@ -2,10 +2,10 @@ package rozetka.com.tests;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import rozetka.com.models.Powder;
 import rozetka.com.pages.*;
-
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by val on 04.05.2018.
@@ -40,18 +40,16 @@ public class TestPowderToDb extends BasePageInstance {
         chemicalPage.clickWashes();
         washePage.clickWashingMeans();
         washingMeanPage.clickPowders();
-        Map<String, Integer> map = new HashMap<>();
-        if (pageNumber >= 1) {
-            for (int i = 1; i <= pageNumber; i++) {
-                powderPage.clickNextPage(i);
-                map.putAll(powderPage.sortMapFromTo(powderPage.getPowders(), priceFrom, priceTo));
+        List<Powder> list = new ArrayList<>();
+        for (int i = 1; i <= pageNumber; i++) {
+            list.addAll(powderPage.getFilteredPowders(priceFrom, priceTo));
+            if (i != pageNumber && pageNumber > 1) {
+                powderPage.clickNextPage(i + 1);
             }
         }
-        //System.out.println("RESULT");
-        //for (Map.Entry<String, Integer> pair: map.entrySet()) {
-        //    String key = pair.getKey();
-        //    int value = pair.getValue();
-        //    System.out.println(key + " = " + value);
-        //}
+        System.out.println("RESULT");
+        for (Powder powder : list) {
+            System.out.println(powder);
+        }
     }
 }

@@ -8,13 +8,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
+import rozetka.com.models.Powder;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by val on 05.05.2018.
@@ -35,33 +31,34 @@ public class PowderPage {
 
     public void clickNextPage(int pageNumber) {
         By pageBy = By.id("page" + pageNumber);
-        if (pageNumber != 1) {
-            driver.findElement(pageBy).click();
-        }
+        driver.findElement(pageBy).click();
         wait.until(ExpectedConditions.
                 visibilityOfElementLocated(By.cssSelector("#page" + pageNumber + ".active")));
     }
 
-    public Map<String, Integer> getPowders() {
-        Map map = new HashMap<String, Integer>();
+    public List<Powder> getPowders() {
+        List<Powder> list = new ArrayList<>();
         for(WebElement webElement: elements) {
             wait.until(ExpectedConditions.visibilityOf(webElement.findElement(By.className("g-price-uah"))));
             wait.until(ExpectedConditions.visibilityOf(webElement.findElement(By.xpath("./div[3]/a"))));
-            int value = Integer.parseInt(webElement.findElement(By.className("g-price-uah")).getText().
+            int price = Integer.parseInt(webElement.findElement(By.className("g-price-uah")).getText().
                     replaceAll("\\D", ""));
-            String key = webElement.findElement(By.xpath("./div[3]/a")).getText();
-            map.put(key, value);
+            String name = webElement.findElement(By.xpath("./div[3]/a")).getText();
+            list.add(new Powder(name, price));
         }
-        return map;
+        return list;
     }
 
-    public Map<String, Integer> sortMapFromTo(Map<String, Integer> input, int from, int to) {
-        Map result = new HashMap<String, Integer>();
-        for (Map.Entry<String, Integer> pair: input.entrySet()) {
-            String key = pair.getKey();
-            int value = pair.getValue();
-            if (value >= from && value <= to) {
-                result.put(key, value);
+    public List<Powder> getFilteredPowders(int from, int to) {
+        return sortPowderFromTo(getPowders(), from, to);
+    }
+
+    public List<Powder> sortPowderFromTo(List<Powder> input, int from, int to) {
+        List<Powder> result = new ArrayList<>();
+        for (Powder powder : input) {
+            int price = powder.getPrice();
+            if (price >= from && price <= to) {
+                result.add(powder);
             }
         }
         return result;

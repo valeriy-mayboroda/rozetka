@@ -35,11 +35,10 @@ public class TestSmartPhoneToFile extends BasePageInstance {
         phoneTvElectonicPage.clickPhones();
         phonePage.clickSmartPhones();
         List<String> list = new ArrayList<>();
-        list.addAll(smartPhonePage.getNames());
-        if (pageNumber >= 2) {
-            for (int i = 2; i <= pageNumber; i++) {
-                smartPhonePage.clickNextPage(i);
-                list.addAll(smartPhonePage.getNames());
+        for (int i = 1; i <= pageNumber; i++) {
+            list.addAll(smartPhonePage.getNames());
+            if (i != pageNumber && pageNumber > 1) {
+                smartPhonePage.clickNextPage(i + 1);
             }
         }
         smartPhonePage.save(list);
