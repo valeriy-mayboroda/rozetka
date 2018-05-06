@@ -44,7 +44,7 @@ public class SmartPhonePage {
         return list;
     }
 
-    public void save (List<String> list) {
+    public File saveToFile(List<String> list) {
         File file = new File("./src/test/file.txt");
         PrintWriter writer = null;
         try {
@@ -59,5 +59,6 @@ public class SmartPhonePage {
         }
         writer.flush();
         writer.close();
+        return file;
     }
 }

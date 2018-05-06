@@ -1,0 +1,12 @@
+CREATE SCHEMA rozetka;
+
+CREATE TABLE rozetka.powders (
+  `id` INT(7) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(250) NOT NULL,
+  `price` INT(7) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+DROP TABLE IF EXISTS rozetka.powders;

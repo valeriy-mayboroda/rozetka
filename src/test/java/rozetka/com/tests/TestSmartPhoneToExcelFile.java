@@ -10,6 +10,7 @@ import rozetka.com.pages.SmartPhonePage;
 /**
  * Created by val on 04.05.2018.
  */
+
 public class TestSmartPhoneToExcelFile extends BasePageInstance{
     public static HomePage homePage;
     public static PhoneTvElectonicPage phoneTvElectonicPage;

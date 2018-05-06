@@ -1,9 +1,12 @@
 package rozetka.com.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Created by val on 04.05.2018.
@@ -11,6 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class WashePage {
     private WebDriver driver;
+    private WebDriverWait wait;
 
     @FindBy(xpath = "//*[@id=\"category_tree\"]//li[4]/a")
     private WebElement washingMeans;
@@ -18,7 +22,11 @@ public class WashePage {
     public WashePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
+        this.wait = new WebDriverWait(this.driver, 25, 1000);
     }
 
-    public void clickWashingMeans() {washingMeans.click();}
+    public void clickWashingMeans() {
+        washingMeans.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#page1.active")));
+    }
 }

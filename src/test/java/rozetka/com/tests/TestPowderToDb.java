@@ -2,8 +2,11 @@ package rozetka.com.tests;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import rozetka.com.db.DBConnection;
 import rozetka.com.models.Powder;
 import rozetka.com.pages.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,10 +33,14 @@ public class TestPowderToDb extends BasePageInstance {
     }
 
     @Test
-    public void startTest() {
+    public void startTest() throws SQLException {
         int pageNumber = 5;
         int priceFrom = 100;
         int priceTo = 300;
+        String dbName = "rozetka.powders";
+        String URL = "jdbc:mysql://localhost:3306/rozetka?useSSL=false";
+        String USERNAME = "root";
+        String PASSWORD = "root";
         homePage.openUrl();
         homePage.clickHouseholdProducts();
         householdProductPage.clickChemicals();
@@ -47,9 +54,11 @@ public class TestPowderToDb extends BasePageInstance {
                 powderPage.clickNextPage(i + 1);
             }
         }
-        System.out.println("RESULT");
+        DBConnection db = new DBConnection();
+        Connection connection = db.getConnection(URL, USERNAME, PASSWORD);
         for (Powder powder : list) {
-            System.out.println(powder);
+            powder.savePowderToDb(connection, dbName);
         }
+        connection.close();
     }
 }
