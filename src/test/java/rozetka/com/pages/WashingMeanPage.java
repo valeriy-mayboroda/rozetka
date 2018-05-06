@@ -27,6 +27,9 @@ public class WashingMeanPage {
 
     public void clickPowders() {
         powders.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#catalog_goods_block .g-i-tile-i-box-desc .g-i-tile-i-image")));
+        String sideFilterXpath = "//a[contains(@name, 'vid-sredstva-71899_301219')]//span[contains(@class,'filter-parametrs-i-l-i-checkbox-active')]";
+        String upperFilterXpath = "//div[contains(@class, 'filter-active')]//a[contains(@class, 'filter-active-i-link') and text()='Порошок']";
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(sideFilterXpath)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(upperFilterXpath)));
     }
 }

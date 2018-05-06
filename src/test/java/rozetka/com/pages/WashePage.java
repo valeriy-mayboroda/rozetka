@@ -27,6 +27,7 @@ public class WashePage {
 
     public void clickWashingMeans() {
         washingMeans.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#page1.active")));
+        String xpathSelector = "//ul[contains(@class, 'breadcrumbs-catalog')]//span[contains(@class, 'breadcrumbs-catalog-title') and text()='Стиральные средства']";
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathSelector)));
     }
 }
