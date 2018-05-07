@@ -34,7 +34,7 @@ public class HomePage {
     public void clickPhoneTvElectronics() {phoneTvElectronics.click();}
     public void clickHouseholdProducts() {
         householdProducts.click();
-        String xpathSelector = "//ul[contains(@class, 'breadcrumbs-catalog')]//span[contains(@class, 'breadcrumbs-catalog-title') and text()='Товары для дома']";
+        String xpathSelector = "//ul[contains(@class, 'breadcrumbs-catalog')]//span[contains(@class, 'breadcrumbs-catalog-title') and contains(text(),'Товары для дома')]";
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathSelector)));
     }
 }
