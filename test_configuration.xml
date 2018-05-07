@@ -12,7 +12,7 @@
             <class name="rozetka.com.tests.TestPowderToDb"/>
         </classes>
     </test>
-
+    
     <test name="Writing smartphones to excel file">
         <classes>
             <class name="rozetka.com.tests.TestSmartPhoneToExcelFile"/>
