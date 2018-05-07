@@ -14,8 +14,11 @@ import rozetka.com.pages.SmartPhonePage;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Created by val on 03.05.2018.
@@ -36,8 +39,14 @@ public class TestSmartPhoneToFile extends BasePageInstance {
     }
 
     @Test
-    public void startTest() {
+    public void startTest() throws IOException {
         int pageNumber = 3;
+        Properties props = new Properties();
+        FileInputStream fis = new FileInputStream("./src/main/resources/config.properties");
+        props.load(fis);
+        String login = props.getProperty("em.login");
+        String password = props.getProperty("em.password");
+        fis.close();
         homePage.openUrl();
         homePage.clickPhoneTvElectronics();
         phoneTvElectonicPage.clickPhones();
@@ -60,7 +69,7 @@ public class TestSmartPhoneToFile extends BasePageInstance {
                 .buildEmail();
 
         Mailer mailer = MailerBuilder
-                .withSMTPServer("smtp.gmail.com", 587, "valeromayb@gmail.com", "*****")//Sender
+                .withSMTPServer("smtp.gmail.com", 587, login, password)//Sender
                 .withTransportStrategy(TransportStrategy.SMTP_TLS)
                 .withSessionTimeout(10 * 1000)
                 .withDebugLogging(true)
