@@ -45,7 +45,7 @@ public class SmartPhonePage {
     }
 
     public File saveToFile(List<String> list) {
-        File file = new File("./src/test/file.txt");
+        File file = new File("D:\\Документы\\Java\\rozetka\\src\\main\\resources\\config.properties");
         PrintWriter writer = null;
         try {
             writer = new PrintWriter(file, "UTF-8");

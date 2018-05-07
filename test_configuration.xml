@@ -18,5 +18,5 @@
             <class name="rozetka.com.tests.TestSmartPhoneToExcelFile"/>
         </classes>
     </test>
-    
+
 </suite>
