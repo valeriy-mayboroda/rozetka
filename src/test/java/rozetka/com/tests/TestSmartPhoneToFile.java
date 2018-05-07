@@ -42,7 +42,7 @@ public class TestSmartPhoneToFile extends BasePageInstance {
     public void startTest() throws IOException {
         int pageNumber = 3;
         Properties props = new Properties();
-        FileInputStream fis = new FileInputStream("./src/main/resources/config.properties");
+        FileInputStream fis = new FileInputStream("D:\\Документы\\Java\\rozetka\\src\\main\\resources\\config.properties");
         props.load(fis);
         String login = props.getProperty("em.login");
         String password = props.getProperty("em.password");
